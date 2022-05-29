@@ -29,7 +29,7 @@ jobs:
       - uses: debdutdeb/ino@yaml2md
         id: yaml2md-output-md
         with:
-          ino_path: ${GITHUB_WORKSPACE}/ino.yml
+          ino_path: ${{ github.workspace }}/ino.yml
           output_path: ${{ steps.hugo-post-temp-loc.outputs.temp-loc }}
 
       - name: Update main _post_
