@@ -2,7 +2,10 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"io/fs"
 	"io/ioutil"
+	"os"
 
 	"gopkg.in/yaml.v2"
 )
@@ -28,6 +31,16 @@ func main() {
 	err = yaml.Unmarshal(file, topics)
 	if err != nil {
 		panic("failed to read yaml content; " + *path + err.Error())
+	}
+
+	outFile, err := os.OpenFile(*output, 0777, fs.ModeAppend)
+	if err != nil {
+		panic(err)
+	}
+	defer outFile.Close()
+
+	for _, topic := range *topics {
+		outFile.WriteString(fmt.Sprintf("- %s\n", topic))
 	}
 
 }

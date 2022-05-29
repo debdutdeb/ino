@@ -4,6 +4,12 @@ inputs:
   ino_path:
     description: 'Path to ino.yml'
     required: true
+  output_path:
+    description: "Output Path"
+    required: false
+outputs:
+  output_path:
+    description: "MD output path"
 runs:
   using: 'docker'
   image: 'Dockerfile'

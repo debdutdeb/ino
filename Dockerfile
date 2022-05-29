@@ -7,5 +7,6 @@ RUN go build -o /mnt/ino /mnt/src/main.go
 FROM alpine:3.16.0
 
 COPY --from=0 /mnt/ino /bin/ino
+COPY entrypoint.sh /mnt/entrypoint.sh
 
-ENTRYPOINT [ "ino" ]
+ENTRYPOINT ["/bin/sh",  "/mnt/entrypoint.sh" ]
