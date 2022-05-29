@@ -1,0 +1,10 @@
+ino
+themes/
+static/
+public/
+layouts/
+data/
+content/
+.DS_Store
+.hugo_build.lock
+resources/
