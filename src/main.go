@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/fs"
 	"io/ioutil"
 	"os"
 
@@ -40,7 +39,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	outFile, err := os.OpenFile(*output, 0777, fs.ModeAppend)
+	outFile, err := os.OpenFile(*output, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
