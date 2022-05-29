@@ -23,19 +23,27 @@ func main() {
 		panic("ino.yml path is mandatory")
 	}
 
+	if *output == "" {
+		fmt.Fprintln(os.Stderr, "output file location is mandatory")
+		os.Exit(1)
+	}
+
 	file, err := ioutil.ReadFile(*path)
 	if err != nil {
-		panic("failed to read file " + *path + err.Error())
+		fmt.Fprintln(os.Stderr, "failed to read file "+*path+err.Error())
+		os.Exit(1)
 	}
 
 	err = yaml.Unmarshal(file, topics)
 	if err != nil {
-		panic("failed to read yaml content; " + *path + err.Error())
+		fmt.Fprintln(os.Stderr, "failed to read yaml content; "+*path+err.Error())
+		os.Exit(1)
 	}
 
 	outFile, err := os.OpenFile(*output, 0777, fs.ModeAppend)
 	if err != nil {
-		panic(err)
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
 	}
 	defer outFile.Close()
 

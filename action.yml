@@ -13,3 +13,6 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.ino_path }}
+    - ${{ inputs.output_path }}
