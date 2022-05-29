@@ -12,6 +12,7 @@ func main() {
 	topics := &[]string{}
 
 	path := flag.String("ino-path", "", "Path to ino.yml file")
+	output := flag.String("output", "/tmp/output.md", "Output file location")
 
 	flag.Parse()
 
@@ -28,4 +29,5 @@ func main() {
 	if err != nil {
 		panic("failed to read yaml content; " + *path + err.Error())
 	}
+
 }
