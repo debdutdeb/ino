@@ -1,6 +1,6 @@
 #! /bin/sh
 
-output=${$1:-/tmp/index.md}
+output=${1:-/tmp/index.md}
 yaml_path=$2
 
 echo "[DEBUG] output_path=$output_path"
