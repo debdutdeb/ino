@@ -1,3 +1,10 @@
 ino
 ino.yml
 .DS_Store
+.hugo_build.lock
+themes/
+data/
+layouts/
+public/
+resources/
+static/

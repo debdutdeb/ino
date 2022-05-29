@@ -1,8 +1,10 @@
 FROM golang:1.18.2-alpine3.16
 
 COPY src /mnt
+COPY go.mod /mnt
+COPY go.sum /mnt
 
-RUN go build -o /mnt/ino /mnt/src/main.go
+RUN cd /mnt && go build -o ino
 
 FROM alpine:3.16.0
 
