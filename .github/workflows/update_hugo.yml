@@ -37,7 +37,7 @@ jobs:
         run: |
           git switch hugo
           output_path=${{ steps.yaml2md-output-md.outputs.output_path }}
-          echo "[DEBUG] output_path=$output_path"
+          echo "[DEBUG] output_path=$output_file"
           cp -v $output_path ${TOPIC_POST_LOC_POSTFIX%/*}
           echo "::set-output name=topics-path::${GITHUB_WORKSPACE}/${TOPIC_POST_LOC_POSTFIX}"
           cat $output_path
