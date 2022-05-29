@@ -1,0 +1,9 @@
+name: 'INO'
+description: stuff
+inputs:
+  ino_path:
+    description: 'Path to ino.yml'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
