@@ -5,6 +5,9 @@ on:
     branches:
       - "main"
 
+env:
+  TOPIC_POST_LOC_POSTFIX: "content/posts/topics.md"
+
 jobs:
   do:
     if: false
@@ -13,16 +16,37 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Save temp post
+        id: hugo-post-temp-loc
         run: |
-          git checkout hugo
-          cp -v content/posts/
+          git switch hugo
+          path="${GITHUB_WORKSPACE}/${TOPIC_POST_LOC_POSTFIX}"
+          echo "[DEBUG] path=$path"
+          cp -v $path /tmp
+          echo "::set-output name=temp-loc::/tmp/${TOPIC_POST_LOC_POSTFIX##*/}"
+          git switch main
 
       - uses: debdutdeb/ino@yaml2md
         id: yaml2md-output-md
         with:
           ino_path: ${GITHUB_WORKSPACE}/ino.yml
+          output_path: ${{ steps.hugo-post-temp-loc.outputs.temp-loc }}
 
       - name: Update main _post_
+        id: update-main-post
         run: |
-          git checkout hugo
-          cp -v ${{ steps/}}
+          git switch hugo
+          output_path=${{ steps.yaml2md-output-md.outputs.output_path }}
+          echo "[DEBUG] output_path=$output_path"
+          cp -v $output_path ${TOPIC_POST_LOC_POSTFIX%/*}
+          echo "::set-output name=topics-path::${GITHUB_WORKSPACE}/${TOPIC_POST_LOC_POSTFIX}"
+          cat $output_path
+      
+      # - name: Push to hugo
+      #   uses: EndBug/add-and-commit@v9
+      #   with:
+      #     add: ${{ steps.update-main-post.outputs.topics-path }}
+      #     author_name: Debdut Chakraborty
+      #     author_email: debdut.chakraborty@rocket.chat
+      #     commit: --signoff
+      #     message: Update topics list post
+      #     push: true
