@@ -1,0 +1,28 @@
+name: 'Update Hugo MD Post'
+
+on: 
+  push:
+    branches:
+      - "main"
+
+jobs:
+  do:
+    if: false
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Save temp post
+        run: |
+          git checkout hugo
+          cp -v content/posts/
+
+      - uses: debdutdeb/ino@yaml2md
+        id: yaml2md-output-md
+        with:
+          ino_path: ${GITHUB_WORKSPACE}/ino.yml
+
+      - name: Update main _post_
+        run: |
+          git checkout hugo
+          cp -v ${{ steps/}}
