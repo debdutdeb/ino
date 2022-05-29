@@ -1,7 +1,7 @@
 #! /bin/sh
 
-output_path=${1:-/tmp/index.md}
-yaml_path=$2
+output_path=${2:-/tmp/index.md}
+yaml_path=$1
 
 echo "[DEBUG] output_path=$output_path"
 echo "[DEBUG] yaml_path=$yaml_path"

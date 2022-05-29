@@ -37,7 +37,7 @@ func main() {
 
 	file, err := ioutil.ReadFile(path)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "failed to read file "+path+err.Error())
+		fmt.Fprintln(os.Stderr, "failed to read file "+path+" "+err.Error())
 		os.Exit(1)
 	}
 
