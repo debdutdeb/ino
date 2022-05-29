@@ -26,6 +26,7 @@ jobs:
           echo "::set-output name=temp-loc::/tmp/${TOPIC_POST_LOC_POSTFIX##*/}"
           git switch main
           ls -al
+          pwd
 
       - uses: debdutdeb/ino@yaml2md
         id: yaml2md-output-md
